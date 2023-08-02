@@ -3,15 +3,17 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from scipy import interpolate
 
-n = 6 # nr experiments
 
+
+# Dataframe
 df = pd.read_csv('rx_data.csv', delimiter=';', decimal=',', usecols=[
                  'molfrak. Pp', 'biprod', 'HCl (eq.) EtOH'])
 df = df.replace(np.nan, 0)
-bp = np.array(np.array_split(df['biprod'].to_numpy(), n))
+bp = np.array(np.array_split(df['biprod'].to_numpy(), 6)) # splits biproduct data into 6 rows (experiments)
 eq = np.array([0, 0.1, 0.5,1,3,5])
 t = np.array([0,1,2,3,4,6])
 T, EQ = np.meshgrid(t, eq)
+
 # Interpolering
 tnew = np.linspace(0, 6, 100)
 eqnew = np.linspace(0, 5, 100)
